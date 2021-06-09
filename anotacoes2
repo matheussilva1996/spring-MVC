@@ -1,0 +1,123 @@
+anotacoes spring
+
+spring.io
+projects -> baixar spring security
+adicionar no arquivo pom.xml a dependencia spring-boot-starter-security
+se a documentacao nao tiver boa -> spring guides -> https://spring.io/guides/gs/securing-web/
+
+autenticacao em memoria usando spring -> codigo desenvolvido em base.html
+
+autenticacao com jdbc -> para isso é preciso criar umas tabelas especificas como Users e autorities, comandos no banco de dados para criar -> 
+
+create table users(
+    username varchar(50) not null primary key,
+    password varchar(200) not null,
+    enabled boolean not null
+);
+
+create table authorities (
+    username varchar(50) not null,
+    authority varchar(50) not null,
+    constraint fk_authorities_users foreign key(username) references users(username)
+);
+create unique index ix_auth_username on authorities (username,authority);
+
+dentro de WebSecurityConfig -> o metodo configure usa jdbcAutentication, .dataSource, .passwordEncoder
+
+usando BcryptPassword adiciona uma senha forte na nossa aplicacao
+
+
+para linkar os pedidos com os usuarios é ncessario fazer o mapeamento
+
+quando usuario esta logado, é necessario pegar os pedidos daquele usuario, necessario mexer no usuarioController
+
+no html -> o th:href muda de contexto sem quebrar a aplicacao
+
+para reduzir consulta ao banco, pode ser usado o cashe, so acessa o banco se houver atualizacao de itens
+
+para usar @cachebable (books) e no mudi @enbaleCashing
+
+
+tecnologia REST
+
+pedidosRest -> @RestController
+@requestMapping("/api/pedidos")
+
+no browser localhost8080/api/pedidos/aguardando
+
+Vue.js -> framework progressivo. mais sobre: https://vuejs.org/v2/guide/
+
+
+no home html faço link do input preenchido ao usuario com o que é colocado no proprio pedido
+
+
+===================
+MAIS SOBRE
+O Spring é um framework poderoso e geralmente oferece várias formas de atingir um resultado. Isso não é diferente pensando na criação da resposta HTTP de uma Action.
+
+Normalmente basta devolver o modelo dentro do nosso @RestController para gerar a resposta HTTP mas podemos configurar a resposta HTTP mais detalhado, usando a classe ResponseEntity.
+
+A classe ResponseEntity é um builder para definir o corpo (body) da resposta, status e os cabeçalhos. Veja o exemplo:
+
+@RestController
+public class HomeRestController {
+
+    @GetMapping("/oi")
+    ResponseEntity<String> hello() {
+        return ResponseEntity.ok().body("Oi Mundo!");
+    }
+}    
+
+Isso não faz nada mais do que devolver o texto no corpo da resposta junto ao status 200. A vantagem aqui é que deixamos a resposta mais explicita e podemos configurar como desejamos para usar um outro código HTTP, por exemplo.
+
+Segue também o exemplo para usar o ResponseEntity na nossa classe OfertaRest. Repare que o corpo não precisa ser uma string:
+
+@RestController
+@RequestMapping("/api/ofertas")
+public class OfertasRest {
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
+    @PostMapping
+    public ResponseEntity<Oferta> criaOferta(@Valid @RequestBody RequisicaoNovaOferta requisicao) {
+
+        //implementação omitida
+
+        return ResponseEntity.ok().body(nova);
+    }
+}
+
+
+===================
+
+SPRING MVC INTERCEPTOR
+
+spring boot actuator -> serve para monitorar tua aplicacao web
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

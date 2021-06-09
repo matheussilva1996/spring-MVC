@@ -1,0 +1,44 @@
+anotacoes spring
+
+spring boot -> ja tem inbutido setup do server como tomcat
+
+spring mvc -> ja tem o servlet inbutido
+
+para integrar com spring MVC usamos um controller
+
+a view sera usada Tymeleaf -> springEL(expression language) e bootstrap(layout)
+
+para iniciar o projeto, voce pode gerar direto no start.spring.io e selecionar as dependencias Spring web, thymeleaf e spring boot dev tools
+
+a anotacao @controller ja integra nossa funcao com a spring
+dentro de hello.html na tag span th:text="{nome}" ele pega minha variavel
+
+o getbootstrap.com tem todos componentes necessario para estilizar a pagina
+
+funcoes como col e col-sm ajusta posicionamento da imagem e texto dentro de uma div
+
+para se conectar no banco é necessario adicionar mais 2 dependencias -> spring data jpa e mysql driver
+
+@Autowired -> pedir pro spring injetar uma dependencia
+
+@Repository -> spring reconhecer que o pedidoRepository é um repositorio
+
+projeto spring data -> na classe PedidoRepository usando metodo findBystatus ele ja implementa a query necessitada. o tipo dele é uma interface extendendo o JpaRepository
+
+oracle.com javaee tutorial using bean validation
+
+quando em html voce usa varios trechos iguais, voce cria uma template separada,
+base.html declara th:fragment head (nome)
+na home voce coloca th:replace "~(base :: head)"
+
+No último vídeo, vimos o th:replace, que substitui a tag que foi utilizada:
+
+<div th:replace="~{base :: titulo('Meus Pedidos')}"></div>
+
+Existe um atributo "irmão" bem parecido, o th:insert. Veja o exemplo:
+
+<div th:insert="~{base :: titulo('Meus Pedidos')}"></div>
+
+A aplicação é idêntica, com a diferença que o th:insert não substitui a div original e sim joga todo o conteúdo dentro dela.
+
+para atualizar a data foi usado a bilblioteca nova do tymeleaf do javatime localdate
